@@ -1,0 +1,73 @@
+#park-info {
+	margin-bottom: 20px;
+	.tabs-content {
+		@media(max-width:640px) {
+			border: 0;
+		}
+	}
+
+	.tabs-title {
+		font-weight: bold;
+	}
+
+	.tabs-title > a:focus, .tabs-title > a[aria-selected='true'] {
+		color: #fff;
+		background-color: $bf-blue;
+	}
+
+	.tabs-panel {
+		overflow: auto;
+
+	}
+
+	#tab-facilities {
+		& > div {
+			overflow: auto;
+
+			margin-bottom: 20px;
+
+			> div {
+				span::before {
+					content: '- ';
+				}
+			}
+		}
+	}
+
+	iframe {
+		float: right;
+
+		border: 0;
+
+		@media(max-width:640px){
+			display: none;
+		}
+	}
+	.attraction {
+		overflow: auto;
+
+		margin-bottom: 20px;
+
+		img {
+			float: left;
+
+			max-width: 150px;
+			margin-right: 20px;
+		}
+	}
+}
+
+#park-info-mobile {
+	.accordion-title {
+		padding: 10px;
+
+		color: #fff;
+		background-color: $bf-blue;
+
+		font-weight: bold;
+	}
+
+	.accordion-content {
+		overflow: hidden;
+	}
+}

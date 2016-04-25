@@ -1,0 +1,43 @@
+header {
+	margin-bottom: 20px;
+	padding-top: 20px;
+}
+
+#phone-number {
+	color: $bf-yellow !important;
+
+	font-weight: bold;
+
+	@media(max-width:640px) {
+		/* SM Screen */
+		margin-top: 10px;
+	}
+}
+
+#header-menu {
+	ul {
+		margin-top: 5px;
+
+		li {
+			margin: 0;
+
+			border-right: 1px solid #000;
+		}
+
+		li:first-child {
+			border-right: 0;
+		}
+	}
+
+	a {
+		padding: 0 10px;
+
+		color: #000 !important;
+
+		font-size: 12px;
+	}
+}
+
+#feefologo {
+	margin-left: 20px;
+}

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html ng-app="Website">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Details Page</title>
+
+        <!-- CSS Files -->
+        <link rel="stylesheet" href="css/foundation.min.css" />
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/custom.css">
+
+        <!-- Angular -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+        <script src="js/vendor/angular-sanitize.js"></script>
+        <script src="js/app.js"></script>
+
+    </head>
+    <body ng-controller="SiteController as site" style="background-color: #e6e6e6;">
+
+        <div class="off-canvas-wrapper">
+            <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+                <div class="off-canvas position-left" id="offCanvas" data-off-canvas >
+                    <div class="text-right">
+                        <button type="button" class="button" data-toggle="offCanvas"><i class="fa fa-times"></i></button>
+                    </div>
+
+                    <ul class="vertical menu" data-accordion-menu>
+                        <li ng-repeat="link in site.menu.links"><a href="{{ link.href }}">{{ link.title }}</a>
+                            <ul class="menu vertical nested" ng-show="link.sub">
+                                <li ng-repeat="subOne in link.sub"><a href="#">{{ subOne.title }}</a>
+                                    <ul class="menu vertical nested" ng-show="subOne.sub">
+                                        <li ng-repeat="subTwo in subOne.sub"><a href="#">{{ subTwo.title }}</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="off-canvas-content" data-off-canvas-content>
+
+                    <header class="row">
+                        <section id="company-logo" class="column small-6 medium-3 large-4">
+                            <img ng-src="{{site.info.logo}}" alt="{{site.info.name}}" ng-cloak>
+                        </section>
+
+                        <section id="header-info" class="column medium-9 large-8">
+
+                            <div id="phone-number" class="medium-text-right">
+                                Customer Service: <i class="fa fa-phone"></i> <span ng-bind="site.info.phone"></span>
+                            </div>
+
+                            <div id="header-menu" class="show-for-medium">
+                                <ul class="menu align-right simple">
+                                    <li><a href="#"><i class="fa fa-envelope-o"></i> Contact Us</a></li>
+                                    <li><a href="#"><i class="fa fa-question"></i> FAQ</a></li>
+                                    <li><a href="#"><i class="fa fa-key"></i> Login</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </header>
+
+                    <section id="mobile-menu" class="show-for-small-only">
+                        <button type="button" class="button" data-toggle="offCanvas"><i class="fa fa-bars"></i> Menu</button>
+                    </section>
+
+                    <nav class="row show-for-medium" ng-cloak>
+                        <ul class="dropdown menu" data-dropdown-menu>
+                            <li ng-repeat="link in site.menu.links"><a href="{{ link.href }}">{{ link.title }}</a>
+                                <ul class="menu" ng-show="link.sub">
+                                    <li ng-repeat="subOne in link.sub"><a href="#">{{ subOne.title }}</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <div>
+                        <section id="hero-box-desktop" class="row" ng-cloak>
+                            <div id="calender" class="float-right show-for-medium">
+                                <h3 ng-bind="site.details.date" class="text-center"></h3>
+                                <p ng-bind="site.details.description"></p>
+                            </div>
+
+                            <div id="park-logo" ng-cloak>
+                                <img ng-src="{{ site.details.logo }}" alt="{{ site.details.name }}">
+                            </div>
+
+                            <div id="address-bar" class="float-right show-for-medium">
+                                <strong><i class="fa fa-map-signs"></i> {{ site.details.address }}</strong> <span id="viewDir" class="label success" style="display: none;">Get directions</button>
+                            </div>
+
+                            <div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit="7mf658-orbit" data-use-m-u-i="false">
+                                <ul class="orbit-container" tabindex="0">
+                                    <li class="orbit-slide no-motionui is-active is-in" style="display: list-item;" ng-repeat-start="image in site.details.images" ng-if="$first" >
+                                        <div style="height: 400px; background-image: url('{{ image.src }}');"></div>
+                                    </li>
+                                    <li class="orbit-slide no-motionui" style="position: relative; display: none;" ng-repeat-end ng-if="!$first" style="height: 400px; background-image: url('{{ image.src }}');">
+                                        <div style="height: 400px; background-image: url('{{ image.src }}');"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+                    </div>
+
+                    <section id="park-info" class="row show-for-medium" ng-cloak>
+                        <div class="column">
+                            <ul class="tabs show-for-medium" data-tabs id="example-tabs">
+                                <li class="tabs-title is-active" ng-repeat-start="tab in site.details.tabs" ng-if="$first"><a href="#tab-{{ tab.id }}" aria-selected="true">{{ tab.title }}</a></li>
+                                <li class="tabs-title" ng-repeat-end ng-if="!$first" name="{{ tab.title }}"><a href="#tab-{{ tab.id }}" aria-selected="true">{{ tab.title }}</a></li>
+                            </ul>
+
+                            <div class="tabs-content" data-tabs-content="example-tabs">
+
+                                <div class="tabs-panel is-active" id="tab-{{ tab.id }}" ng-repeat-start="tab in site.details.tabs" ng-if="$first">
+                                    <div class="content" ng-bind-html="tab.content"></div>
+                                </div>
+                                <div class="tabs-panel" id="tab-{{ tab.id }}" ng-repeat-end ng-if="!$first">
+                                    <div ng-bind-html="tab.content"></div>
+                                </div>
+
+                                <div class="addthis_sharing_toolbox float-right"></div>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <section id="park-info-mobile" class="row show-for-small-only" ng-cloak>
+                        <ul class="accordion" data-accordion data-allow-all-closed="true">
+                            <li class="accordion-item" data-accordion-item ng-repeat="info in site.details.tabs">
+                                <a href="#" class="accordion-title">{{ info.title }}</a>
+                                <div class="accordion-content" data-tab-content>
+                                    <div ng-bind-html="info.content"></div>
+                                </div>
+                            </li>
+
+                            <li class="accordion-item" data-accordion-item ng-show="park.info.facilities.length || park.info.entertainment.length || park.info.dining.length">
+                                <a href="#" class="accordion-title">Facilities</a>
+                                <div class="accordion-content" data-tab-content>
+                                    <div class="section" ng-show="park.info.facilities.length">
+                                        <h5>Facilities</h5>
+                                        <div class="column medium-4 float-left" ng-repeat="facility in park.info.facilities"><span>{{ facility.title }}</span></div>
+                                    </div>
+                                    <div class="section" ng-show="park.info.entertainment.length">
+                                        <h5>Entertainment</h5>
+                                        <div class="column medium-4 float-left" ng-repeat="entertainment in park.info.entertainment"><span>{{ entertainment.title }}</span></div>
+                                    </div>
+                                    <div class="section" ng-show="park.info.dining.length">
+                                        <h5>Eating &amp; Dining</h5>
+                                        <div class="column medium-4 float-left" ng-repeat="dining in park.info.dining"><span>{{ dining.title }}</span></div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="accordion-item" data-accordion-item ng-show="park.info.attractions.length">
+                                <a href="#" class="accordion-title">Attractions</a>
+                                <div class="accordion-content" data-tab-content>
+                                    <div class="attraction" ng-repeat="attraction in park.info.attractions">
+                                        <h5>{{ attraction.title }}</h5>
+                                        <img ng-src="{{ attraction.image }}" class="show-for-medium">
+
+                                        <div ng-bind-html="attraction.content"></div>
+
+                                        <p ng-show="attraction.link"><a href="{{ attraction.link }}" target="_blank"><i class="fa fa-globe"></i> Visit website</a></p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="addthis_sharing_toolbox float-right"></div>
+                    </section>
+
+
+                    <section id="further-links" class="row">
+
+                        <div class="column small-6 medium-3 text-center">
+                            <a href="#"><img src="img/icons/dog.png" alt="Dog Friendly Holidays"></a>
+                        </div>
+
+                        <div class="column small-6 medium-3 text-center">
+                            <a href="#"><img src="img/icons/caravan.png" alt="Cheap Caravan Holidays"></a>
+                        </div>
+
+                        <div class="column small-6 medium-3 text-center">
+                            <a href="#"><img src="img/icons/insurance.png" alt="Holiday Insurance"></a>
+                        </div>
+
+                        <div class="column small-6 medium-3 text-center">
+                            <a href="#"><img src="img/icons/faq.png" alt="FAQ and useful Info"></a>
+                        </div>
+
+                    </section>
+
+                    <section id="other-links" class="row">
+                        <h5 class="column medium-12">Useful Links</h5>
+
+                        <nav class="column small-6 medium-3">
+                            <ul class="">
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">UK Park Map</a></li>
+                            </ul>
+                        </nav>
+
+                        <nav class="column small-6 medium-3">
+                            <ul class="">
+                                <li><a href="#">How to Book</a></li>
+                                <li><a href="#">Blogs</a></li>
+                            </ul>
+                        </nav>
+
+                        <nav class="column small-6 medium-3">
+                            <ul class="">
+                                <li><a href="#">Terms &amp; Conditions</a></li>
+                                <li><a href="#">Privacy and Cookie Policy</a></li>
+                            </ul>
+                        </nav>
+
+                        <nav class="column small-6 medium-3">
+                            <ul class="">
+                                <li><a href="#">Affiliates</a></li>
+                                <li><a href="#">Partners</a></li>
+                            </ul>
+                        </nav>
+                    </section>
+
+                    <footer class="row">
+                        <section class="column medium-6">
+                            <p>
+                                © Curabitur blandit tempus porttitor.<br>
+                                Curabitur blandit tempus porttitor.<br>
+                                Curabitur blandit tempus porttitor.
+                            </b>
+                        </section>
+                    </footer>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- JS -->
+        <script src="js/vendor/jquery.min.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="js/foundation.min.js"></script>
+
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-56e5970f8785e356"></script>
+
+
+
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                // Remove elements hidden by Angular
+                $('.ng-hide').remove();
+
+                // Initialise Foundation after document ready for Angular
+                $(document).foundation();
+
+                function goToByScroll(id){
+                    // Remove "link" from the ID
+                    id = id.replace("link", "");
+                    // Scroll
+                    $('html,body').animate({
+                        scrollTop: $(id).offset().top}, 'slow');
+                };
+
+
+                $('#viewDir').click(function() {
+                    // remove is active from other tabs
+                    $('.tabs-title.is-active>a').attr('aria-selected', 'false');
+                    $('.tabs-title.is-active').removeClass('is-active');
+                    $('.tabs-panel.is-active').attr('aria-hidden', 'true');
+                    $('.tabs-panel.is-active').removeClass('is-active');
+
+                    //add is active to directions tab
+                    dirTab.parent().addClass('is-active');
+                    $('.tabs-title.is-active>a').attr('aria-selected', 'true');
+                    $(tabId).addClass('is-active');
+                    $(tabId).attr('aria-hidden', 'false');
+
+                    goToByScroll(tabId);
+                });
+
+                var dirTab = $('a').filter(function(index) { return $(this).text() === "Directions"; });
+                if (dirTab.length) {
+                    var tabId = dirTab.attr('href')
+                    $('#viewDir').show();
+                }
+            });
+        </script>
+    </body>
+</html>

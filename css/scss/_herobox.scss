@@ -1,0 +1,120 @@
+#hero-box-desktop {
+	position: relative;
+
+	margin-bottom: 20px;
+
+	@media(max-width: 640px) {
+		margin-bottom: 0;
+	}
+
+	.orbit {
+		overflow: hidden;
+
+		height: 400px;
+
+		@media(max-width:640px) {
+			/* SM Screen */
+			height: 150px;
+		}
+	}
+
+	#calender {
+		position: absolute;
+		z-index: 90;
+		top: 0;
+		right: 0;
+
+		width: 250px;
+		height: 400px;
+		padding: 20px;
+
+		color: #fff;
+		background-image: url('../img/assets/bg-tran-black.png');
+
+		@media(max-width:640px) {
+			/* SM Screen */
+			height: 150px;
+		}
+
+		.ui-datepicker {
+			width: 100% !important;
+			margin-bottom: 20px;
+
+			table {
+				font-size: 10px;
+			}
+
+			td a {
+				text-align: center;
+			}
+		}
+
+		.ui-datepicker-buttonpane {
+			display: none;
+		}
+	}
+}
+
+.orbit-image {
+	min-height: 400px;
+
+	@media(max-width:640px) {
+		/* SM Screen */
+		height: 150px;
+	}
+}
+
+#park-logo {
+	position: absolute;
+	z-index: 100;
+	top: 5px;
+	left: 5px;
+
+	max-width: 25%;
+
+    @include box-shadow(0 0 10px #555);
+}
+
+#address-bar {
+	position: absolute;
+	z-index: 100;
+	bottom: 0;
+
+	width: 100%;
+	padding: 5px 10px;
+
+	color: #fff;
+	background-color: $bf-blue;
+}
+
+#calendar-mobile {
+    .accordion {
+        border: 0;
+    }
+
+	.accordion-title {
+		padding: 10px;
+
+		color: #fff;
+		background-color: $bf-blue;
+
+		font-weight: bold;
+	}
+
+	.ui-datepicker {
+		width: 100% !important;
+		margin-bottom: 20px;
+
+		table {
+			font-size: 10px;
+		}
+
+		td a {
+			text-align: center;
+		}
+	}
+
+	.ui-datepicker-buttonpane {
+		display: none;
+	}
+}
